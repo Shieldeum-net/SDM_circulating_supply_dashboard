@@ -10,10 +10,10 @@ const port = 3000;
 // BSCSCAN API Key (ENV)
 const apiKey = process.env.BSCSCAN_API_KEY;
 
-// Contract address of CGPT token (ENV)
+// Contract address of SLDM token (ENV)
 const cgptContractAddress = process.env.CGPT_CONTRACT_ADDRESS;
 
-// Maximum Supply of CGPT token (ENV)
+// Maximum Supply of SLDM token (ENV)
 const MaxSupply = process.env.CGPT_MAX_SUPPLY;
 
 const cache = new NodeCache({ stdTTL: 600 }); // Set the cache expiration time to 600 seconds (10 minutes)
@@ -21,113 +21,83 @@ const cache = new NodeCache({ stdTTL: 600 }); // Set the cache expiration time t
 // List of contract addresses with additional information
 const contractAddresses = [
   {
-    address: '0x1f7bAAf93e0449394e80f3A24c14fB2fA667495c',
+    address: '0x2234a8b8801a455F5E3fC53B597062bB9b1E9d15',
     chain: 'BSC',
     type: 'TeamFinance Vesting',
+    wallet: 'Seed Round (ref: tokenomics)', 
+  },
+  {
+    address: '0x574997D4e07476954c7BBDAa6f785eeB3A5A9c42',
+    chain: 'BSC',
+    type: 'ChainGPT Pad Vesting',
+    wallet: 'Private Round (ref: tokenomics)', 
+  },
+  {
+    address: '0x59779C59F473cF53fcE9ef60439f9Bf83E4A3b26',
+    chain: 'BSC',
+    type: 'TeamFinance Vesting',
+    wallet: 'Strategic Round (ref: tokenomics)', 
+  },
+  {
+    address: '0xD196dc2aa8C4c1d392830488aC9833451b84cB7b',
+    chain: 'BSC',
+    type: 'ChainGPT Pad Vesting',
+    wallet: 'Public (IDO) Round (ref: tokenomics)', 
+  },
+  {
+    address: '0xdCfd1F3Aeea3369bC55B8a3beEE94d9FD5D96Ed2',
+    chain: 'BSC',
+    type: 'TeamFinance Vesting',
+    wallet: 'Liquidity Round (ref: tokenomics)', 
+  },
+  {
+    address: '0x193364EC780eFD52D89D202Fcecd3Dd2D347925e',
+    chain: 'BSC',
+    type: 'TeamFinance Vesting',
+    wallet: 'Marketing Round (ref: tokenomics)', 
+  },
+  {
+    address: '0xe8B9988Bede0AA3e9b8659fB5D1b5474195A0c33',
+    chain: 'BSC',
+    type: 'TeamFinance Vesting',
+    wallet: 'Ecosystem Round (ref: tokenomics)', 
+  },
+  {
+    address: '0x2411b49688f7ec4b113d2a072164e3690006ea4c',
+    chain: 'BSC',
+    type: 'TeamFinance Vesting',
+    wallet: 'DAO Round (ref: tokenomics)', 
+  },
+  {
+    address: '0x561CCAF59F6394c49F716F7B4de72eACD35E19E4',
+    chain: 'BSC',
+    type: 'TeamFinance Vesting',
+    wallet: 'Team Round (ref: tokenomics)', 
+  },
+  {
+    address: '0xa8a50aDbdddf1162920D79ed34629d3B3D77Db2C',
+    chain: 'BSC',
+    type: 'TeamFinance Vesting',
+    wallet: 'Team Round (ref: tokenomics)', 
+  },
+  {
+    address: '0x45306Bc13B202DDc5870143977d2c9657fb3e1AE',
+    chain: 'BSC',
+    type: 'TeamFinance Vesting',
+    wallet: 'Team Round (ref: tokenomics)', 
+  },
+  {
+    address: '0xdC3d9cCA151d241b322EB5388Aa3C6948C3259C6',
+    chain: 'BSC',
+    type: 'TeamFinance Vesting',
+    wallet: 'Seed Round (ref: tokenomics)', 
+  },
+  {
+    address: '0x15317799f8E78B81dccb55B3cD0F4EA190276E96',
+    chain: 'BSC',
+    type: 'ChainGPT Pad Vesting',
     wallet: 'KOLs Round (ref: tokenomics)', 
   },
- // {
- //   address: '0x77A8b449e7cd61dd54B755034Baf9d00EeeD1076',
- //   chain: 'BSC',
- //   type: 'TeamFinance Vesting',
- //   wallet: 'Seedify IDO Fee (3.5%) in tokens', 
- // },
-  {
-    address: '0x0aaf30015ee2393dbeab2d8830f6d244f2dfa0f1',
-    chain: 'BSC',
-    type: 'TeamFinance Vesting',
-    wallet: 'Farming/Staking (ref: tokenomics)', 
-  },
-  {
-    address: '0xb63ea5700834975e8349cfd2d54216f7749b0e49',
-    chain: 'BSC',
-    type: 'TeamFinance Vesting',
-    wallet: 'Liquidity Allocation (ref: tokenomics)', 
-  },
-  {
-    address: '0x9d9ceebf7fb22df325c37591c43c7c0e0f36c6a2',
-    chain: 'BSC',
-    type: 'TeamFinance Vesting',
-    wallet: 'Private B Round (ref: tokenomics)', 
-  },
-  {
-    address: '0x2d842cf79aa3d6bcef9e37dd9d8809ebab813ad5',
-    chain: 'BSC',
-    type: 'TeamFinance Vesting',
-    wallet: 'Private A Round (ref: tokenomics)', 
-  },
-  {
-    address: '0x73e49c140c35fc1cc0c716f00d435e22ab8c1305',
-    chain: 'BSC',
-    type: 'TeamFinance Vesting',
-    wallet: 'Treasury, Team, DAO Fund, Marketing, Development (ref: tokenomics)', 
-  },
-  {
-    address: '0x39f119f1d89ba0e14daded2a5901f3c42135726c',
-    chain: 'BSC',
-    type: 'TeamFinance Vesting',
-    wallet: 'Available Advisory Tokens (ref: tokenomics)', 
-  },
-//  {
-//    address: '0x915a6fF38cab0bB0B027179D7b5f196DAB25C626',
-//    chain: 'BSC',
-//    type: 'IDO Round Vesting',
-//    wallet: 'Seedify IDO', 
-//  },
-//  {
-//    address: '0x6dAa1b5F9cF268AF2fd93Dff8083E2d3ca237008',
-//    chain: 'BSC',
-//    type: 'Crowdfunding Vesting',
-//    wallet: 'YAYNetwork', 
-//  },
- // {
- //   address: '0x98E9EBc9539d674cbcd505b6A6483991d50c2356',
-//    chain: 'BSC',
-//    type: 'Crowdfunding Vesting',
-//    wallet: 'Decubate', 
-//  },
- // {
- //   address: '0xd377766831DE29B39Ea45687983F9F590add517f',
- //   chain: 'BSC',
- //   type: 'IDO Round Vesting',
- //   wallet: 'EnjinStarter', 
- // },
-//  {
-//    address: '0x436CE2ce8d8d2Ccc062f6e92faF410DB4d397905',
-//    chain: 'BSC',
-//    type: 'IDO Round Vesting',
-//    wallet: 'Poolz', 
-//  },
-      {
-    address: '0x926D28476A4bB4F7E4c27C913a3495b3d7393006',
-    chain: 'BSC',
-    type: 'TeamFinance  Contract (Locked)',
-    wallet: 'Seedify  Incubation Fee (1%)', 
-  },
-//  {
-//    address: '0xd58DE7168b7d22048db5EdAafa07265B70407Bc0',
-//    chain: 'BSC',
-//    type: 'IDO Round Vesting',
-//    wallet: 'WePad', 
-//  },
-//  {
-//    address: '0x765a6ee976137801F2661c3644E1fde369A8ED18',
-//    chain: 'BSC',
-//    type: 'Staking Pools',
-//    wallet: 'CGPT Staking Rewards & Staked (via Decubate)', 
-//  },
-//  {
-//    address: '0x62A402DEf6Ca37E9CA7a544bE34954748088CCEE',
-//    chain: 'BSC',
-//    type: 'Staking Pools',
-//    wallet: 'ChainGPT Pad Staking Pool', 
-//  },
-//  {
-//    address: '0x28FBFA75850E246BdD454A0e76FeAA42D771757B',
-//    chain: 'BSC',
-//    type: 'Staking Pools',
-//    wallet: 'ChainGPT Pad Staking Pool - Rewards Distributor', 
-//  },
 ];
 
 
@@ -283,15 +253,15 @@ app.get('/', async (req, res) => {
     }
   </style>
   
-  <h1>$CGPT Circulating Supply Tracker</h1>
+  <h1>$SLDM Circulating Supply Tracker</h1>
   <p>Total Supply: 1,000,000,000</p>
-  <p>Burnt $CGPT: ${burntTokens.toLocaleString()}</p>
-  <p>Live Circulating Supply of $CGPT: ${totalSupply.toLocaleString()} </p>
+  <p>Burnt $SLDM: ${burntTokens.toLocaleString()}</p>
+  <p>Live Circulating Supply of $SLDM: ${totalSupply.toLocaleString()} </p>
   <br><br>
   <table>
     <tr class="title-row">
       <th>Contract Address</th>
-      <th>Balance (CGPT)</th>
+      <th>Balance (SLDM)</th>
       <th>Chain</th>
       <th>Type</th>
       <th>Name</th>
@@ -301,7 +271,7 @@ app.get('/', async (req, res) => {
       <td colspan="5"></td>
     </tr>
     <tr class="total-supply-row">
-      <td>$CGPT Circulating Supply</td>
+      <td>$SLDM Circulating Supply</td>
       <td>${totalSupply.toLocaleString()}</td>
       <td></td>
       <td></td>
