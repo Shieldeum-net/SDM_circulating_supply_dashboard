@@ -10,10 +10,10 @@ const port = 3000;
 // BSCSCAN API Key (ENV)
 const apiKey = process.env.BSCSCAN_API_KEY;
 
-// Contract address of SLDM token (ENV)
+// Contract address of SDM token (ENV)
 const cgptContractAddress = process.env.CGPT_CONTRACT_ADDRESS;
 
-// Maximum Supply of SLDM token (ENV)
+// Maximum Supply of SDM token (ENV)
 const MaxSupply = process.env.CGPT_MAX_SUPPLY;
 
 const cache = new NodeCache({ stdTTL: 600 }); // Set the cache expiration time to 600 seconds (10 minutes)
@@ -253,15 +253,15 @@ app.get('/', async (req, res) => {
     }
   </style>
   
-  <h1>$SLDM Circulating Supply Tracker</h1>
+  <h1>$SDM Circulating Supply Tracker</h1>
   <p>Total Supply: 1,000,000,000</p>
-  <p>Burnt $SLDM: ${burntTokens.toLocaleString()}</p>
-  <p>Live Circulating Supply of $SLDM: ${totalSupply.toLocaleString()} </p>
+  <p>Burnt $SDM: ${burntTokens.toLocaleString()}</p>
+  <p>Live Circulating Supply of $SDM: ${totalSupply.toLocaleString()} </p>
   <br><br>
   <table>
     <tr class="title-row">
       <th>Contract Address</th>
-      <th>Balance (SLDM)</th>
+      <th>Balance (SDM)</th>
       <th>Chain</th>
       <th>Type</th>
       <th>Name</th>
@@ -271,7 +271,7 @@ app.get('/', async (req, res) => {
       <td colspan="5"></td>
     </tr>
     <tr class="total-supply-row">
-      <td>$SLDM Circulating Supply</td>
+      <td>$SDM Circulating Supply</td>
       <td>${totalSupply.toLocaleString()}</td>
       <td></td>
       <td></td>
