@@ -1,17 +1,14 @@
-# $CGPT Token Circulating Supply Tracker
+# $SDM Token Circulating Supply Tracker
 
-##### $CGPT Supply Dashboard (default):
-https://supply.chaingpt.org
+##### $SDM Supply Dashboard (default):
+https://supply.shieldeum.net
 
 #### Endpoints:
 ##### Circulating Supply: 
-https://supply.chaingpt.org/supply
+https://supply.shieldeum.net/supply
 
-##### Total Burnt CGPT Tokens: 
-https://supply.chaingpt.org/burn
-
-##### TotalSupply - Burnt: 
-https://supply.chaingpt.org/totalsupply
+##### TotalSupply: 
+https://supply.shieldeum.net/totalsupply
 
 ## How To Deploy
 1- Fork this repo <br> 
